@@ -13,7 +13,7 @@ Knockout-bindings-autorequire means you don't have to manually depend on and car
 * Automatically stop loading binding handlers as soon as you stop using them
 * Never have to make JS changes just because the HTML is hooked up slightly differently
 
-## Downloading loglevel
+## Downloading knockout-bindings-autorequire
 
 knockout-bindings-autorequire  is also available via [Bower](https://github.com/bower/bower) (`bower install knockout-bindings-autorequire `) or [JamJS](http://jamjs.org/packages/#/details/knockout-bindings-autorequire ) (`jam install knockout-bindings-autorequire `)
 

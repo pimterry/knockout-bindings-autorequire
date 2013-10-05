@@ -1,4 +1,5 @@
-# knockout-bindings-autorequire [![Build Status](https://travis-ci.org/pimterry/knockout-bindings-autorequire.png)](https://travis-ci.org/pimterry/knockout-bindings-autorequire) [![Dependency status](https://david-dm.org/pimterry/knockout-bindings-autorequire/dev-status.png)](https://david-dm.org/pimterry/knockout-bindings-autorequire#info=devDependencies&view=table)
+# knockout-bindings-autorequire
+[![Build Status](https://travis-ci.org/pimterry/knockout-bindings-autorequire.png)](https://travis-ci.org/pimterry/knockout-bindings-autorequire) [![Dependency status](https://david-dm.org/pimterry/knockout-bindings-autorequire/dev-status.png)](https://david-dm.org/pimterry/knockout-bindings-autorequire#info=devDependencies&view=table)
 
 Small simple Knockout plugin to let you tie dependency management of your knockout binding handlers to where they're actually used: the bindings themselves, by automatically finding the undefined bindings you're using and hooking into RequireJS (or any other AMD loader) to load them up.
 

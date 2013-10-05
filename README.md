@@ -1,50 +1,86 @@
-Node Boilerplate Version 2
-==========================
-*Requires Node v0.6.6 (or newer)*
-node-boilerplate takes html-boilerplate, express, connect, jade and Socket.IO and organizes them into a ready to use website project. It's a fast way to get working on your Node website without having to worry about the setup. It takes care of all the boring parts, like setting up your views, 404 page, 500 page, getting the modules organized, etc... 
+# knockout-bindings-autorequire [![Build Status](https://travis-ci.org/pimterry/knockout-bindings-autorequire.png)](https://travis-ci.org/pimterry/knockout-bindings-autorequire) [![Dependency status](https://david-dm.org/pimterry/knockout-bindings-autorequire/dev-status.png)](https://david-dm.org/pimterry/knockout-bindings-autorequire#info=devDependencies&view=table)
 
-Node Boilerplate has 4 goals:
+Small simple Knockout plugin to let you tie dependency management of your knockout binding handlers to where they're actually used: the bindings themselves, by automatically finding the undefined bindings you're using and hooking into RequireJS (or any other AMD loader) to load them up.
 
-1. To end the repetition involved with starting a new Node website project
-2. To never install anything outside of the project directory (For easier production deployment)
-3. To make it easy to install additional modules within the project directory
-4. To enable easy upgrade or freezing of project dependencies  
-(These goals are much easier to meet now that node includes the node_modules convention)
+Knockout-bindings-autorequire means you don't have to manually depend on and carefully load your knockout binding handlers yourself; just wrap your knockout binding application through this plugin's API, and every extra binding handler you're using will be automatically detected, and loaded and setup ready automatically.
 
-To start a project:
-		
-		git clone git://github.com/robrighter/node-boilerplate.git mynewproject
-		cd mynewproject
-		./initproject.sh
-This will copy down all of the boilerplate files, organize them appropriately and init a fresh new git repository within which you can build your next big thing.
+**knockout-bindings-autorequire is still in a pre-release state, and the below is primarily an outline of the plans, not current functionality**
 
+## Benefits
 
-To run the boilerplate template app:
+* Stop JavaScript viewmodels being tied to the specific bindings used in the HTML
+* Automatically stop loading binding handlers as soon as you stop using them
+* Never have to make JS changes just because the HTML is hooked up slightly differently
 
-		node server.js
+## Downloading loglevel
 
-Go to http://0.0.0.0:8081 and click on the send message link to see socket.io in action.
+knockout-bindings-autorequire  is also available via [Bower](https://github.com/bower/bower) (`bower install knockout-bindings-autorequire `) or [JamJS](http://jamjs.org/packages/#/details/knockout-bindings-autorequire ) (`jam install knockout-bindings-autorequire `)
 
+Alternatively if you just want to grab the file yourself, you can download either the current stable [production version][min] or the [development version][max] directly.
 
-Additional Features:
+Finally, if you want to tweak knockout-bindings-autorequire  to your own needs or you immediately need the cutting-edge version, clone this repo and see [Developing & Contributing](#developing--contributing) below for build instructions.
 
-1. Creates a package.json file consistent with associated best practices (http://blog.nodejitsu.com/package-dependencies-done-right)
-2. Adds .gitignore for the node_modules directory
-3. Includes 404 page and associated route
-4. Includes 500 page
+[min]: https://raw.github.com/pimterry/knockout-bindings-autorequire/master/dist/knockout-bindings-autorequire.min.js
+[max]: https://raw.github.com/pimterry/knockout-bindings-autorequire/master/dist/knockout-bindings-autorequire.js
 
-To add additional modules:
+## How to use it
 
-Update the package.json file to include new module dependencies and run 'npm install'.
+Knockout-bindings-autorequire requires you to be using an AMD module loader, and using knockout as an AMD module. To use it with default options only, change your current code that looks like this:
 
-**If you have a different set of default modules that you like to use, the structure is setup such that you can fork the project and replace the module dependencies outlined in the ./templates/apps/package.json file to best fit your needs and the initproject.sh script will initialize projects with your new set of modules.**
+```javascript
+define(["knockout"], function (ko) {
+  ko.applyBindings();
+});
+```
 
-Deployment
-===============
+to this:
 
-node-boilerplate is setup to be easily deployed on a Joyent Node SmartMachine. This means that:
+```javascript
+define(["knockout", "knockout-bindings-autorequire!"], function (ko) {
+  ko.applyBindings();
+});
+```
 
-1. The version of Node is defined in config.json and in package.json
-2. The main script to run is server.js
-3. The web server port is pulled from process.env.PORT 
+Alternatively, knockout-bindings-autorequire can be used as directly without even touching knockout, with:
 
+```javascript
+define(["knockout-bindings-autorequire"], function(koAutorequired) {
+  koAutorequired.applyBindings(); // same API as ko.applyBindings(), but autorequires first
+});
+```
+
+Finally, knockout-bindings-autorequire can be used as directly, with your own management of the binding process, by using:
+
+```javascript
+define(["knockout", "knockout-bindings-autorequire"], function (ko, autorequireBindings) {
+  autorequireBindings(function () {
+    ko.applyBindings();
+  });
+});
+```
+
+## Developing & Contributing
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality.
+
+Builds can be run with grunt: run `grunt dist` to build a distributable version of the project (in /dist), or `grunt test` to just run the tests and linting. During development you can run `grunt watch` and it will monitor source files, and rerun the tests and linting as appropriate when they're changed.
+
+_Also, please don't manually edit files in the "dist" subdirectory as they are generated via Grunt. You'll find source code in the "lib" subdirectory!_
+
+#### Release process
+
+To do a release of knockout-bindings-autorequire:
+
+* Update the version number in package.json and bower.json
+* Run `grunt dist` to build a distributable version in dist/
+* Update the release history in this file (below)
+* Commit the built code, tagging it with the version number and a brief message about the release
+* Push to Github
+* Run `jam publish` to publish to JamJS
+
+## Release History
+
+No releases yet: watch this space
+
+## License
+Copyright (c) 2013 Tim Perry  
+Licensed under the MIT license.

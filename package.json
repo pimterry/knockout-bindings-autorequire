@@ -3,6 +3,10 @@
   "description": "A Knockout plugin to automatically load (via RequireJS) the required bindings",
   "version": "0.1.0",
   "homepage": "http://github.com/pimterry/knockout-bindings-autorequire",
+  "repository": {
+      "type" : "git",
+      "url" : "http://github.com/pimterry/knockout-bindings-autorequire.git"
+  },
   "scripts": {
     "test": "grunt test"
   },
@@ -10,11 +14,11 @@
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-cli": "~0.1.6",
-    "grunt-contrib-jshint": "~0.1.1",
-    "grunt-contrib-watch": "~0.2.0",
-    "grunt-contrib-jasmine": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.4",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-jasmine": "~0.5.2",
     "grunt-template-jasmine-requirejs": "~0.1.1",
-    "grunt-open": "~0.2.0",
-    "grunt-contrib-connect": "~0.2.0"
+    "grunt-open": "~0.2.2",
+    "grunt-contrib-connect": "~0.5.0"
   }
 }
